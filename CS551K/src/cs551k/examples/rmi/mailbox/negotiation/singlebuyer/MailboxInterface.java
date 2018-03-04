@@ -12,7 +12,7 @@ import java.rmi.RemoteException;
  */
 public interface MailboxInterface extends Remote
 {
-  public Message receive(String agentname) throws RemoteException ;
+  public Message receive (String agentname ) throws RemoteException ;
   public void send(Message message) throws RemoteException;
 
 }
