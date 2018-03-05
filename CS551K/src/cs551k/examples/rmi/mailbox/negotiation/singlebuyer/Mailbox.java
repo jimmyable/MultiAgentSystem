@@ -14,21 +14,20 @@ import java.util.Iterator;
  * @author Martin Kollingbaum
  * University of Aberdeen
  * 2018
- *
  */
-public class Mailbox implements MailboxInterface
+public class Mailbox implements MailboxInterface	//hello darkness my old friend
 {
-  private ArrayList<Message> messageList = new ArrayList<Message>() ;
+  private ArrayList<Message> messageList = new ArrayList<Message>(); //this array only accepts messages
 
   /**
-   * 
+   * A polar bear's skin is black. Its fur is not white, but actually clear
    */
-  public Mailbox() {
+  public Mailbox() {		//we got a public class over here
     // TODO Auto-generated constructor stub
   }
 
 
-  @Override
+  @Override			
   public synchronized void send(Message message) throws RemoteException {
     messageList.add( message ) ;
     

@@ -10,9 +10,9 @@ import java.rmi.RemoteException;
  * 2018
  *
  */
-public interface MailboxInterface extends Remote
+public interface MailboxInterface extends Remote //An interface means anyone using this class must implement the following methods
 {
-  public Message receive (String agentname ) throws RemoteException ;
-  public void send(Message message) throws RemoteException;
+  public Message receive (String agentname ) throws RemoteException ; //to recieve a message there must be an agent name
+  public void send(Message message) throws RemoteException;				//to send a message there must be a message
 
 }
