@@ -68,6 +68,52 @@ public class Agent {
 	private void buyer(String sellername, String itemname) throws IOException {
 		// ===============================================
 		// Console input:
+		
+		//TODO make a new goods thingy for buyers
+		//TODO send the info here (Good, HighestPrice, Increment)
+		//TODO Add teh goods list
+		
+		//TODO Add budget  = 100
+		
+		//TODO While budget > 0:
+		
+				//TODO while check if inbox not empty
+						//TODO pop up messages and save them to myInbox
+						
+				//TODO for every message in inbox
+						//TODO if message = type INFORM OF AUCTION
+						//TODO Add it to list of auctions (AuctioneerID, Auction ID)
+						//TODO make a list of acutions?
+				
+				
+						//TODO if message type is call for proposal containing (AuctioneerID, my ID, AuctionID, Good, Price)
+								//TODO IF the aucitoneerID, AUctionID not in the lest above
+										//TODO send a "not understood" message cos we havent heard the inform of auction!
+								
+								//TODO ELSE 
+										//TODO IF (Good, Highest Price, Increase) is in my GoodsPriceBox
+												//TODO IF Price is =< Highest Price
+														//TODO IF Price + (Price*Inrease) =< Highest Price
+																//TODO then do Offer = Price+ (Price*Incremenet)
+		
+														//TODO Else send a proposal of the highest Offer
+														//TODO send(propsal(HighestOffer))
+												
+												//TODO ELSE
+												//return null because we outbid/not interested
+		
+						//TODO IF message type = reject
+						//TODO return null nothing to do here
+		
+						//TODO If message type = accept
+						//TODO Budget = Budget - offer		//update the budget
+		
+						//TODO If message type =  inform? (no bids)
+						//TODO return null cos wut?
+		
+		//END
+								
+				//TODO else do (offer price and real p
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 		Message message = null;
 		double myprice = 0;
@@ -151,12 +197,53 @@ private void seller (List<Object> GoodsPrices, List<Object> Participants, String
       	while ( (message = mailbox.receive(myname)) != null) {
       			myInbox.add( message);
       			}
-      	if (myInbox.size() > 1) {
+      	for (int i = 0; i < myInbox.size(); i++) {
+      		if ((myInbox.get(i).getMessageType()) != Message.TELL_BID) {
+      			myInbox.remove(i);			//possible problems becase im looping and removing over the same list
+      		}
+      	}
+      	if (myInbox.size() > 1) {		//now if more than 1 messages then we go to english autionc yah?
       		DutchAuctionON = false;
       		boolean EnglishAuctionON = true;
       	}
+      	else {
+      		DutchAuctionON = false;
+      		String cursedWinner = myInbox.get(0).getSender();
+      		double cursedBid = myInbox.get(0).getPrice();
+      	}
 
+      		///ENGLISH AUCTION
+      	//TODO init top bid
+      	//TODO IF EnlgishAuctionON = true
+		      	//TODO Send inform of auction again same Auction ID
+		      	//TODO search though myInbox to find the highest offer
+		      	//TODO send call for proposal(Good Highest Offer)
+      			
+      			//TODO While EnlgishAuctionON = true
+      					//TODO pop up all the messages like before
+      					//TODO Append them to the myInbox shit
+      	
+      					//TODO IF check if messages are empty for second round
+      							//TODO ENlgishAuctionON = false
+      							//TODO If topbid >= my Reserve	
+      									//TODO send accept ma nibba (MyID, Bidder, AuctionID, Bid)
+      									//TODO remove the succesful bidder from participants
+      									//TODO send a request payment to the winner
+      	
+      							//TODO for all the other peeps left in participants
+      							//TODO tell em there were no bids this round and thus
+      							//TODO this nibba won, cue inform(this.nibba(winner))
 
+      					//TODO ELSE loop though and sort out the decent bids like the ones that are legit and greater/equal to asking price
+      	
+      							//TODO Pick the highest Bidder and store them
+      							//TODO For everyone else tell send a reject message
+      							
+      							//TODO Increase Price by the increment
+      							//TODO IF Check if price increased is less than the highest bid
+      									//TODO in which case use the highest bid = price
+      							//TODO for everyone else send a new proposal with the new price
+      	
     }
 	}
 
