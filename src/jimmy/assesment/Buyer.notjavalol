@@ -1,0 +1,106 @@
+package jimmy.assesment;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
+
+public class Buyer extends Agent {
+
+	public Buyer(String agentname, String hostname, int registryport)
+			throws MalformedURLException, RemoteException, NotBoundException {
+		super(agentname, hostname, registryport);
+		// TODO Auto-generated constructor stub
+	}
+	
+	private void buyer(String sellername, String itemname) throws IOException {
+		// ===============================================
+		
+		
+		//TODO make a new goods thingy for buyers
+		//TODO send the info here (Good, HighestPrice, Increment)
+		//TODO Add teh goods list
+		
+		//TODO Add budget  = 100
+		
+		//TODO While budget > 0:
+		
+				//TODO while check if inbox not empty
+						//TODO pop up messages and save them to myInbox
+						
+				//TODO for every message in inbox
+						//TODO if message = type INFORM OF AUCTION
+						//TODO Add it to list of auctions (AuctioneerID, Auction ID)
+						//TODO make a list of acutions?
+				
+				
+						//TODO if message type is call for proposal containing (AuctioneerID, my ID, AuctionID, Good, Price)
+								//TODO IF the aucitoneerID, AUctionID not in the lest above
+										//TODO send a "not understood" message cos we havent heard the inform of auction!
+								
+								//TODO ELSE 
+										//TODO IF (Good, Highest Price, Increase) is in my GoodsPriceBox
+												//TODO IF Price is =< Highest Price
+														//TODO IF Price + (Price*Inrease) =< Highest Price
+																//TODO then do Offer = Price+ (Price*Incremenet)
+		
+														//TODO Else send a proposal of the highest Offer
+														//TODO send(propsal(HighestOffer))
+												
+												//TODO ELSE
+												//return null because we outbid/not interested
+		
+						//TODO IF message type = reject
+						//TODO return null nothing to do here
+		
+						//TODO If message type = accept
+						//TODO Budget = Budget - offer		//update the budget
+		
+						//TODO If message type =  inform? (no bids)
+						//TODO return null cos wut?
+		
+		//END
+								
+				//TODO else do (offer price and real p
+		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+		Message message = null;
+		double myprice = 0;
+		double myfactor = 0.5;
+		double mythreshold = 0.1;
+
+		System.out.print("Start buyer, press return ");
+		String command = in.readLine();
+
+		// ask for price of item
+		// message = new Message (Message.ASK_PRICE, myname, sellername, itemname, 0 ) ;
+		mailbox.send(message);
+
+		while (true) {
+			if ((message = mailbox.receive(myname)) != null) {
+				System.out.println("\n" + "   received from " + message.getSender() + ":");
+				System.out.println("Item  = " + message.getItem());
+				System.out.println("Price = " + message.getPrice());
+
+				if (message.getMessageType() == Message.ACCEPT) {
+					System.out.println("Seller accepts at price " + message.getPrice());
+					break;
+				} else if ((message.getPrice() - myprice) < mythreshold) {
+					System.out.println("Buyer accepts at price " + message.getPrice());
+					// message = new Message (Message.ACCEPT, myname, message.getSender(),
+					// message.getItem(), message.getPrice());
+					break;
+				}
+
+				myprice = myprice + ((message.getPrice() - myprice) * myfactor);
+
+				// message = new Message ( Message.TELL_BID, myname, message.getSender(),
+				// message.getItem(), myprice) ;
+				mailbox.send(message);
+
+			}
+		}
+	}
+
+}
