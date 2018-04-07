@@ -21,7 +21,7 @@ Message types are as follows:
 - END (type2)
 - TELl_BID (type3)
 - ACCEPT (type4)
-- INFORM_START_OF_AUCTIOB (type6)
+- INFORM_START_OF_AUCTION (type6)
 - CALL_FOR_PROPOSAL (type7)
 
 ![Alt text](screenshots/Mailbox.png?raw=true "Mailbox")
@@ -33,7 +33,7 @@ Message types are as follows:
 >Type of Auction is displayed
 >Profits are calculated and displayed
 
-Seller.pic
+![Alt text](screenshots/Seller.png?raw=true "Seller")
 
 
 **Buyers**
@@ -41,3 +41,7 @@ Seller.pic
 >Displays the offer and item when a bid is placed
 >Notification of winning item and price
 >Money saved comapring with reserve price is also shown
+
+![Alt text](screenshots/Buyer1.png?raw=true "Buyer_1")
+![Alt text](screenshots/Buyer2.png?raw=true "Buyer_2")
+![Alt text](screenshots/Buyer3.png?raw=true "Buyer_3")
