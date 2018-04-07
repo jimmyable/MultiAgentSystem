@@ -120,7 +120,6 @@ public class Agent {
 					} else if (message.getMessageType() == Message.END) {
 						System.out.println("10/10 would auction again");
 						GoodsPrices.remove(message.getItem());
-						System.out.println(GoodsPrices.size());
 
 					} else if (message.getMessageType() == Message.ACCEPT) {
 						Winnings.put(message.getItem(), message.getPrice());
@@ -159,7 +158,7 @@ public class Agent {
 	private void seller(Map<String, List<Double>> GoodsPrices, List<String> Participants, String myname)
 			throws IOException, InterruptedException {
 
-		System.out.println("Hey Vsauce" + myname + " here");
+		System.out.println("Cap'n " + myname + " here");
 		Message message = null;
 		int AuctionID = 0;
 		Map<String, Double> Sold = new HashMap<String, Double>();

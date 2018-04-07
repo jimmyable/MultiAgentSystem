@@ -22,12 +22,13 @@ x-terminal-emulator -e "java -classpath ./src jimmy.assesment.Mailbox 50010 5001
 
 sleep .5
 echo "Starting Seller"
-gnome-terminal -e "bash -c \"java -classpath ./src jimmy.assesment.Agent Seller localhost 50010 $1 $3; exec bash\""
+gnome-terminal -e "bash -c \"java -classpath ./src jimmy.assesment.Agent Seller localhost 50010 $1; exec bash\""
 
 sleep .5
-echo "Starting Buyer"
-gnome-terminal -e "bash -c \"java -classpath ./src jimmy.assesment.Agent Buyer_1 localhost 50010 $1 $3; exec bash\""
-echo "Starting Buyer"
-gnome-terminal -e "bash -c \"java -classpath ./src jimmy.assesment.Agent Buyer_2 localhost 50010 $1 $3; exec bash\""
-echo "Starting Buyer"
-gnome-terminal -e "bash -c \"java -classpath ./src jimmy.assesment.Agent Buyer_3 localhost 50010 $1 $3; exec bash\""
+echo "Starting $1 Buyers"
+for i in $(seq 1 $1)
+do
+	echo "Starting Buyer_$i"
+	gnome-terminal -e "bash -c \"java -classpath ./src jimmy.assesment.Agent Buyer_$i localhost 50010 $1; exec bash\""
+done
+
